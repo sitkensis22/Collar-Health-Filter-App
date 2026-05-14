@@ -57,8 +57,83 @@
       "defaultValue": null,
       "type": "STRING"
     },
-
-    
+    {
+      "id": "gps_accuracy",
+      "name": "Set GPS accuracy-specific filter",
+      "description": "Please check this box if you want to filter GPS accuracy alerts for specific id(s).",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "gps_accuracy_id",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for GPS accuracy alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter GPS accuracy alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if GPS accuracy filter is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
+      "id": "gps_transmission",
+      "name": "Set GPS transmission-specific filter",
+      "description": "Please check this box if you want to filter GPS transmission alerts for specific id(s).",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "gps_transmission_id",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for GPS transmission alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter GPS transmission alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if GPS transmission filter is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
+      "id": "gps_resurrection",
+      "name": "Set GPS resurrection-specific filter",
+      "description": "Please check this box if you want to filter GPS resurrection alerts for specific id(s).",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "gps_resurrection_id",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for GPS resurrection alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter GPS resurrection alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if GPS resurrection filter is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
+      "id": "filter_specific",
+      "name": "Set mortality alert trigger?",
+      "description": "Please check this box if you want to check for mortality events in a manufacturer-provided field.",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "filter_specific_id",
+      "name": "Mortality field name",
+      "description": "Enter field name(s) that tracks mortality status in the dataset. Note that multiple fields may be provided to cover cases where collar data come from multiple vendors and more than one mortality status field exists. Multiple values must be comma-separated and input is only used if mortality trigger is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
+      "id": "mortality",
+      "name": "Set mortality alert trigger?",
+      "description": "Please check this box if you want to check for mortality events in a manufacturer-provided field.",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "mortality_alias",
+      "name": "Mortality field name",
+      "description": "Enter field name(s) that tracks mortality status in the dataset. Note that multiple fields may be provided to cover cases where collar data come from multiple vendors and more than one mortality status field exists. Multiple values must be comma-separated and input is only used if mortality trigger is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
+      "id": "mortality_value",
+      "name": "Mortality status value",
+      "description": "Enter character string of field that indicates a mortality has occurred. Note that multiple fields may be provided to cover cases where collar data come from multiple vendors and more than one mortality value indicates a mortality has occured. Multiple values must be comma-separated and input is only used if mortality trigger is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    } 
   ],
   "dependencies": {
     "R": [
