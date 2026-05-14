@@ -69,14 +69,23 @@ The App should work for any kind of (location) data. However, the App is only me
 The App filters the binary numerical (1/0) fields that were appended to the move2 data in the previous workflow step by the Collar Health Alert App, where the condition is 1 for locations that meet the alert criteria and 0 otherwise. When a filtering condition is met, one or all of the alert fields (mortality, cluster, nsd, voltage, gps_accuracy, gps_transmission, and gps_resurrection) are set to 0 for the identifier(s) present in the filter input settings (e.g., `filter_specific_id`) depending on which filter types are activated. Note that these alert fields are used downstream in other Apps that integrate into a workflow such as the Collar Health Shiny App. 
 
 ### Most common errors
-**No email received: Cause 1: the condition has not been met. Cause 2: the Workflow is not scheduled. Schedule the Workflow instance to receive an email when the condition is met.
 
 ### Null or error handling
-**Setting `mortality_alias`:** If the variable(s) is (or are) not present in the input dataset or not provided when the mortality switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
+**Setting `mortality_id`:** If the identifier(s) are not present in the input dataset or not provided when the mortality filter switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
 
-**Setting `mortality_value`:** If the value given is not in the variable provided for the `mortality_alias` or not provided when the mortality switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variable levels in the input dataset to confirm their existence and spelling.
+**Setting `cluster_id`:** If the identifier(s) are not present in the input dataset or not provided when the cluster filter switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
 
-**Setting `voltage_alias`:** If the variable(s) is (or are) not present in the input dataset or not provided when the voltage switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
+**Setting `nsd_id`:** If the identifier(s) are not present in the input dataset or not provided when the net_squared displacement filter switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
+
+**Setting `voltage_id`:** If the identifier(s) are not present in the input dataset or not provided when the voltage filter switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
+
+**Setting `gps_accuracy_id`:** If the identifier(s) are not present in the input dataset or not provided when the GPS accuracy filter switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
+
+**Setting `gps_transmission_id`:** If the identifier(s) are not present in the input dataset or not provided when the GPS transmission filter switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
+
+**Setting `gps_resurrection_id`:** If the identifier(s) are not present in the input dataset or not provided when the GPS resurrection filter switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling.
+
+**Setting `gps_resurrection_id`:** If the identifier(s) are not present in the input dataset or not provided when the GPS resurrection filter switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling.
 
 **Setting `gps_accuracy_alias`:** If the variable(s) is (or are) not present in the input dataset or not provided when the GPS accuracy switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
 
