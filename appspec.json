@@ -2,76 +2,128 @@
   "version": "1.2",
   "settings": [
     {
-      "id": "sdk",
-      "name": "The name of the MoveApps SDK",
-      "description": "Showcase requesting a string input from the users of your app.",
-      "defaultValue": "MoveApps SDK",
+      "id": "mortality",
+      "name": "Set mortality-specific filter",
+      "description": "Please check this box if you want to filter mortality alerts for specific id(s).",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "mortality_id",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for mortality alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter mortality alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if mortality filter is activated.",
+      "defaultValue": null,
       "type": "STRING"
     },
     {
-      "id": "year",
-      "name": "The year",
-      "description": "Insert description for the year setting setting",
-      "defaultValue": 2022,
-      "type": "INTEGER"
+      "id": "cluster",
+      "name": "Set cluster-specific filter",
+      "description": "Please check this box if you want to filter cluster alerts for specific id(s).",
+      "defaultValue": false,
+      "type": "CHECKBOX"
     },
     {
-      "id": "auxiliary-file-a",
-      "name": "Personalization",
-      "description": "You can personalize the app by providing a file",
-      "type": "USER_FILE"
-    }
+      "id": "cluster_id",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for cluster alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter cluster alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if cluster filter is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
+      "id": "nsd",
+      "name": "Set net-squared displacement-specific filter",
+      "description": "Please check this box if you want to filter net-squared displacement alerts for specific id(s).",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "nsd_id",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for net-squared displacement alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter net-squared displacement alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if nsd filter is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
+      "id": "voltage",
+      "name": "Set voltage-specific filter",
+      "description": "Please check this box if you want to filter voltage alerts for specific id(s).",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "voltage_id",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for voltage alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter voltage alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if voltage filter is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+
+    
   ],
   "dependencies": {
     "R": [
       {
-        "name": "lubridate"
+        "name": "amt"
       },
       {
-        "remotes": "install_git('https://gitlab.com/bartk/move2.git')"
+        "name": "ctmm"
+      },
+      {
+        "name": "move2"
+      },
+      {
+        "name": "remotes"
+      },
+      {
+        "name": "sf"
+      },
+      {
+        "name": "tidyverse"
+      },
+      {
+        "name": "units"
+      },
+      {
+        "remotes": "install_github('bhaskarvk/leaflet.extras')"
+      },
+      {
+        "remotes": "install_github('cran/GPSeqClus')"
       }
     ]
   },
-  "providedAppFiles": [
-    {
-      "settingId": "auxiliary-file-a",
-      "from": "data/auxiliary/user-files/provided-app-files/auxiliary-file-a/sample.txt"
-    }
-  ],
   "license": {
     "key": "MIT"
   },
   "language": "eng",
   "keywords": [
-    "example",
-    "template"
+    "alert",
+    "collar",
+    "cluster",
+    "nsd",
+    "voltage",
+    "gps",
+    "mortality",
+    "resurrection"
   ],
   "people": [
     {
-      "firstName": "Charles",
-      "middleInitials": null,
-      "lastName": "Darwin",
-      "email": "creator@example.com",
+      "firstName": "Daniel",
+      "middleInitials": "R.",
+      "lastName": "Eacker",
+      "email": "daniel.eacker@tauruswildlifeconsulting.com",
       "roles": [
         "author",
+        "compiler",
         "creator"
       ],
-      "orcid": null,
-      "affiliation": null,
-      "affiliationRor": null
+      "orcid": "0000-0003-0194-0726",
+      "affiliation": "Taurus Wildlife Consulting"
     }
   ],
   "funding": [
     {
-      "name": "funder name",
-      "comment": "grant for App"
-    }
-  ],
-  "references": [
-    {
-      "type": "IsDescribedBy",
-      "note": "Darwin, C. 1900. The creation. Journal XY. 1-2",
-      "url": "https://anylink.xyz"
+      "name": "Government of Yukon",
+      "comment": "Grant for to develop Collar Health MoveApps"
     }
   ]
 }
