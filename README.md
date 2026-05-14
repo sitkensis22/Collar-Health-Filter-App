@@ -5,7 +5,7 @@ MoveApps
 Github repository: *github.com/sitkensis22/Collar-Health-Filter-App* (*https://github.com/sitkensis22/Collar-Health-Filter-App*)
 
 ## Description
-Provides 3 classes of filtering for 7 different types of alerts (mortality, cluster, nsd, voltage, gps_accuracy, gps_transmission, and gps_resurrection) in the data that were triggered by Collar Health Alert App: (1) filter-specific, (2) individual-specific, and (3) variable-specific.
+Provides 3 classes of filtering for 7 different types of collar health alerts (mortality, cluster, nsd, voltage, gps_accuracy, gps_transmission, and gps_resurrection) in the data that were triggered by Collar Health Alert App: (1) filter-specific, (2) individual-specific, and (3) variable-specific.
 
 ## Documentation
 This App provides functionality to filter collar health alerts that were appended to the user's move2 dataset from using the Collar Health Alert App in the previous step in a workflow. It allows the user to (1) filter the data for a specific alert type (e.g., mortality) and identifier (either the track id(s) or serial number(s) ("tag_local_identifier") but not both at the same time), (2) filter all alerts in the data for a specific identifier (either the track id(s) or serial number(s)), or (3) filter all alerts in the data based on a field (e.g., "collar_end_type") in the data and specific value in that field (e.g., "off-air"). The filters will not remove individual(s) from the dataset. Rather, the filtering will change the respective alert fields from a value of 1 to 0 (denoting no alert present). The custom filter that uses a variable in the data will identifiy any individual(s) in the data that have the value of that variable and set all of their alert variables to 0. 
@@ -16,7 +16,7 @@ Finally, this App was designed as a precusor step in a workflow for the Collar H
 This app was developed for any taxinomic group.  
 
 #### Required data properties
-The App should work for any kind of (location) data. However, the App is meant to work only in conjunction with the Collar Health Alert App.
+The App should work for any kind of (location) data. However, the App is only meant to work in conjunction with the Collar Health Alert App in the previous step of workflow.
 
 ### Input type
 `move2::move2_loc`
@@ -27,21 +27,21 @@ The App should work for any kind of (location) data. However, the App is meant t
 ### Artefacts
 
 ### Settings 
-**Set mortality alert (`mortality`):** This logical input acts as a switch to turn on mortality event monitoring based on a field or multiple fields provided in the next input. 
+**Set mortality-specific filter (`mortality`):** This logical input acts as a switch to turn on mortality alert filtering based on idenfier(s) provided in the `mortality_id` input. 
 
-**Mortality field name (`mortality_id`):** This character string input is the field name that tracks mortality status in the dataset. Note that multiple fields may be provided to accomodate datasets that are from multiple collar vendors with different mortality status fields. Multiple values must be comma-separated. The field is ignored if the mortality alert is not activated.
+**Identifier(s) for mortality-specifc filtering (`mortality_id`):** This character string input is the track id(s) or serial number(s) (i.e., local_tag_identifier) to filter mortality alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if mortality filter is activated.
 
-**Set cluster alert (`cluster`):** This logical input acts as a switch to turn on cluster event monitoring. 
+**Set cluster-specific filter (`cluster`):** This logical input acts as a switch to turn on cluster alert filtering based on idenfier(s) provided in the `cluster_id` input. 
 
-**Cluster search radius (`cluster_id`):** This numeric input defines the search radius in meters for cluster analysis. Note that the input will only be used when cluster trigger is activated.
+**Identifier(s) for cluster-specifc filtering (`cluster_id`):** This character string input is the track id(s) or serial number(s) (i.e., local_tag_identifier) to filter cluster alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if cluster filter is activated.
 
-**Set net-squared displacement alert (`nsd`):** This logical input acts as a switch to turn on maximum net-squared displacement event monitoring.
+**Set net-squared displacement-specific filter (`nsd`):** This logical input acts as a switch to turn on cluster alert filtering based on idenfier(s) provided in the `nsd_id` input. 
 
-**Threshold for maximum net-squared displacement (`nsd_id`):** This numeric input defines the threshold in square meters for the maximum net-squared displacement to trigger an event. Note that the input will only be used when net-squared displacement trigger is activated.
+**Identifier(s) for net-squared displacement-specific filtering (`nsd_id`):** This character string input is the track id(s) or serial number(s) (i.e., local_tag_identifier) to filter net-squared displacement alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if nsd filter is activated.
 
-**Set voltage alert (`voltage`):** This logical input acts as a switch to turn on voltage condition monitoring.
+**Set voltage-specific filter (`voltage`):** This logical input acts as a switch to turn on voltage alert filtering based on idenfier(s) provided in the `voltage_id` input. 
 
-**Voltage field name (`voltage_id`):** This character string input is the field name that tracks voltage in the dataset. Note that multiple fields may be provided to accomodate datasets that are from multiple collar vendors with different voltage fields. Multiple values must be comma-separated. The field is ignored if the voltage alert is not activated.
+**Identifier(s) for voltage-specifc filtering (`voltage_id`):** This character string input is the track id(s) or serial number(s) (i.e., local_tag_identifier) to filter voltage alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if voltage filter is activated.
 
 **Set GPS accuracy alert (`gps_accuracy`):** This logical input acts as a switch to turn on GPS accuracy monitoring.
 
