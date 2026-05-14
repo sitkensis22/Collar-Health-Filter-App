@@ -3,7 +3,7 @@
   "settings": [
     {
       "id": "mortality",
-      "name": "Set mortality-specific filter",
+      "name": "Set mortality-specific filter?",
       "description": "Please check this box if you want to filter mortality alerts for specific id(s).",
       "defaultValue": false,
       "type": "CHECKBOX"
@@ -17,7 +17,7 @@
     },
     {
       "id": "cluster",
-      "name": "Set cluster-specific filter",
+      "name": "Set cluster-specific filter?",
       "description": "Please check this box if you want to filter cluster alerts for specific id(s).",
       "defaultValue": false,
       "type": "CHECKBOX"
@@ -31,7 +31,7 @@
     },
     {
       "id": "nsd",
-      "name": "Set net-squared displacement-specific filter",
+      "name": "Set net-squared displacement-specific filter?",
       "description": "Please check this box if you want to filter net-squared displacement alerts for specific id(s).",
       "defaultValue": false,
       "type": "CHECKBOX"
@@ -45,7 +45,7 @@
     },
     {
       "id": "voltage",
-      "name": "Set voltage-specific filter",
+      "name": "Set voltage-specific filter?",
       "description": "Please check this box if you want to filter voltage alerts for specific id(s).",
       "defaultValue": false,
       "type": "CHECKBOX"
@@ -59,7 +59,7 @@
     },
     {
       "id": "gps_accuracy",
-      "name": "Set GPS accuracy-specific filter",
+      "name": "Set GPS accuracy-specific filter?",
       "description": "Please check this box if you want to filter GPS accuracy alerts for specific id(s).",
       "defaultValue": false,
       "type": "CHECKBOX"
@@ -73,7 +73,7 @@
     },
     {
       "id": "gps_transmission",
-      "name": "Set GPS transmission-specific filter",
+      "name": "Set GPS transmission-specific filter?",
       "description": "Please check this box if you want to filter GPS transmission alerts for specific id(s).",
       "defaultValue": false,
       "type": "CHECKBOX"
@@ -87,7 +87,7 @@
     },
     {
       "id": "gps_resurrection",
-      "name": "Set GPS resurrection-specific filter",
+      "name": "Set GPS resurrection-specific filter?",
       "description": "Please check this box if you want to filter GPS resurrection alerts for specific id(s).",
       "defaultValue": false,
       "type": "CHECKBOX"
@@ -101,36 +101,36 @@
     },
     {
       "id": "filter_specific",
-      "name": "Set mortality alert trigger?",
-      "description": "Please check this box if you want to check for mortality events in a manufacturer-provided field.",
+      "name": "Set filter for specific id(s)?",
+      "description": "Please check this box if you want to filter out all alerts for a specific track id(s) or serial number(s) (i.e., local_tag_identifier).",
       "defaultValue": false,
       "type": "CHECKBOX"
     },
     {
       "id": "filter_specific_id",
-      "name": "Mortality field name",
-      "description": "Enter field name(s) that tracks mortality status in the dataset. Note that multiple fields may be provided to cover cases where collar data come from multiple vendors and more than one mortality status field exists. Multiple values must be comma-separated and input is only used if mortality trigger is activated.",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for individual-specific alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter all alerts for a specific individual. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if individual-specific filter is activated.",
       "defaultValue": null,
       "type": "STRING"
     },
     {
-      "id": "mortality",
-      "name": "Set mortality alert trigger?",
-      "description": "Please check this box if you want to check for mortality events in a manufacturer-provided field.",
+      "id": "filter_custom",
+      "name": "Set filter for custom variables?",
+      "description": "Please check this box if you want to filter out all alerts for a specific track id(s) that meet the criteria for custom alias(es) and value(s).",
       "defaultValue": false,
       "type": "CHECKBOX"
     },
     {
-      "id": "mortality_alias",
-      "name": "Mortality field name",
-      "description": "Enter field name(s) that tracks mortality status in the dataset. Note that multiple fields may be provided to cover cases where collar data come from multiple vendors and more than one mortality status field exists. Multiple values must be comma-separated and input is only used if mortality trigger is activated.",
+      "id": "filter_custom_alias",
+      "name": "Custom filter field name(s)",
+      "description": "Enter field name(s) to use to filter out all alerts for a specific track id(s) in the dataset. Note that multiple fields may be provided, but they must be comma-separated. Input is only used if custom filter is activated.",
       "defaultValue": null,
       "type": "STRING"
     },
     {
-      "id": "mortality_value",
-      "name": "Mortality status value",
-      "description": "Enter character string of field that indicates a mortality has occurred. Note that multiple fields may be provided to cover cases where collar data come from multiple vendors and more than one mortality value indicates a mortality has occured. Multiple values must be comma-separated and input is only used if mortality trigger is activated.",
+      "id": "filter_custom_value",
+      "name": "Custom filter value(s)",
+      "description": "Enter character string value of custom alias field to use to filter out all alerts for a specific track id(s) in the dataset. Note that multiple values may be provided but they must be comma-separated. Input is only used if custom filter is activated.",
       "defaultValue": null,
       "type": "STRING"
     } 
