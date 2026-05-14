@@ -130,7 +130,7 @@
     {
       "id": "filter_custom_value",
       "name": "Custom filter value(s)",
-      "description": "Enter character string value of custom alias field to use to filter out all alerts for a specific track id(s) in the dataset. Note that multiple values may be provided but they must be comma-separated. Input is only used if custom filter is activated.",
+      "description": "Enter character string value of custom alias field to use to filter out all alerts for a specific track id(s) in the dataset. Note that multiple values may be provided, but they must be comma-separated. Input is only used if custom filter is activated.",
       "defaultValue": null,
       "type": "STRING"
     } 
@@ -138,31 +138,10 @@
   "dependencies": {
     "R": [
       {
-        "name": "amt"
-      },
-      {
-        "name": "ctmm"
-      },
-      {
         "name": "move2"
       },
       {
-        "name": "remotes"
-      },
-      {
-        "name": "sf"
-      },
-      {
         "name": "tidyverse"
-      },
-      {
-        "name": "units"
-      },
-      {
-        "remotes": "install_github('bhaskarvk/leaflet.extras')"
-      },
-      {
-        "remotes": "install_github('cran/GPSeqClus')"
       }
     ]
   },
@@ -174,6 +153,7 @@
     "alert",
     "collar",
     "cluster",
+    "filter",
     "nsd",
     "voltage",
     "gps",
