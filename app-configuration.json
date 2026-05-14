@@ -1,4 +1,21 @@
 {
-    "sdk": "MoveApps R SDK",
-    "year": 2014
+    "mortality": true,
+    "mortality_id": "X749_20813892",
+    "cluster": true,
+    "cluster_id": "X749_20813892",
+    "nsd": true,
+    "nsd_id": "X749_20813892",
+    "voltage": true,
+    "voltage_id": "X749_20813892",
+    "gps_accuracy": true,
+    "gps_accuracy_id": "X749_20813892",
+    "gps_transmission": true,
+    "gps_transmission_id": "X749_20813892",
+    "gps_resurrection": true,
+    "gps_resurrection_id": "X749_20813892",
+    "filter_specific": true,
+    "filter_specific_id": "X746_20813885",
+    "filter_custom": true,
+    "filter_custom_alias": "collar_end_type",
+    "filter_custom_value": "off-air"
 }
