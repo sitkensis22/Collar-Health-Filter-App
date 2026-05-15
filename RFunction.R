@@ -36,7 +36,7 @@ rFunction = function(
   }else
   # if not just use track_id as a filter and give warning
   if(isFALSE("tag_local_identifier" %in% colnames(mt_track_data(data)))){
-    logger.error(paste("tag_local_identifier","not found in data set. Using only track id to filter data."))
+    logger.info(paste("tag_local_identifier","not found in data set. Using only track id to filter data."))
     id_data <- data.frame(track_id = as.factor(unique(mt_track_id(data))))
   }
   # create id_check variable depending on number of columns in id_data
