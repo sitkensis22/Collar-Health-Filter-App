@@ -36,7 +36,7 @@ rFunction = function(
   }else
   # if not just use track_id as a filter and give warning
   if(isFALSE("tag_local_identifier" %in% colnames(mt_track_data(data)))){
-    logger.info(paste("tag_local_identifier","not found in data set. Using only track id to filter data."))
+    logger.info("tag_local_identifier not found in data set. Using only track id to filter data.")
     id_data <- data.frame(track_id = as.factor(unique(mt_track_id(data))))
   }
   # create id_check variable depending on number of columns in id_data
@@ -51,7 +51,7 @@ rFunction = function(
   if(mortality){
     # first check if track id(s) or tag_local_identifier(s) exist in the data for mortality alert ids. if not stop operation.
     if(isFALSE(all(mortality_id %in% id_check))){
-      logger.warn(paste("Identifier(s) for mortality alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)"))
+      logger.warn("Identifier(s) for mortality alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
     }
     # now filter mortality alerts for given mortality_id(s)
     # if the id_data has two columns and mortality_id(s) are the track_id(s)
@@ -69,7 +69,7 @@ rFunction = function(
   if(cluster){
     # first check if track id(s) or tag_local_identifier(s) exist in the data for cluster alert ids. if not stop operation.
     if(isFALSE(all(cluster_id %in% id_check))){
-      logger.warn(paste("Identifier(s) for cluster alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)"))
+      logger.warn("Identifier(s) for cluster alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
     }
     # now filter cluster alerts for given cluster_id(s)
     # if the id_data has two columns and cluster_id(s) are the track_id(s)
@@ -87,7 +87,7 @@ rFunction = function(
   if(nsd){
     # first check if track id(s) or tag_local_identifier(s) exist in the data for nsd alert ids. if not stop operation.
     if(isFALSE(all(nsd_id %in% id_check))){
-      logger.warn(paste("Identifier(s) for nsd alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)"))
+      logger.warn("Identifier(s) for nsd alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
     }
     # now filter nsd alerts for given nsd_id(s)
     # if the id_data has two columns and nsd_id(s) are the track_id(s)
@@ -105,7 +105,7 @@ rFunction = function(
   if(voltage){
     # first check if track id(s) or tag_local_identifier(s) exist in the data for voltage alert ids. if not stop operation.
     if(isFALSE(all(voltage_id %in% id_check))){
-      logger.warn(paste("Identifier(s) for voltage alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)"))
+      logger.warn("Identifier(s) for voltage alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
     }
     # now filter voltage alerts for given voltage_id(s)
     # if the id_data has two columns and voltage_id(s) are the track_id(s)
@@ -123,7 +123,7 @@ rFunction = function(
   if(gps_accuracy){
     # first check if track id(s) or tag_local_identifier(s) exist in the data for gps_accuracy alert ids. if not stop operation.
     if(isFALSE(all(gps_accuracy_id %in% id_check))){
-      logger.warn(paste("Identifier(s) for gps_accuracy alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)"))
+      logger.warn("Identifier(s) for gps_accuracy alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
     }
     # now filter gps_accuracy alerts for given gps_accuracy_id(s)
     # if the id_data has two columns and gps_accuracy_id(s) are the track_id(s)
@@ -141,7 +141,7 @@ rFunction = function(
   if(gps_transmission){
     # first check if track id(s) or tag_local_identifier(s) exist in the data for gps_transmission alert ids. if not stop operation.
     if(isFALSE(all(gps_transmission_id %in% id_check))){
-      logger.warn(paste("Identifier(s) for gps_transmission alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)"))
+      logger.warn("Identifier(s) for gps_transmission alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
     }
     # now filter gps_transmission alerts for given gps_transmission_id(s)
     # if the id_data has two columns and gps_transmission_id(s) are the track_id(s)
@@ -159,7 +159,7 @@ rFunction = function(
   if(gps_resurrection){
     # first check if track id(s) or tag_local_identifier(s) exist in the data for gps_resurrection alert ids. if not stop operation.
     if(isFALSE(all(gps_resurrection_id %in% id_check))){
-      logger.warn(paste("Identifier(s) for gps_resurrection alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)"))
+      logger.warn("Identifier(s) for gps_resurrection alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
     }
     # now filter gps_resurrection alerts for given gps_resurrection_id(s)
     # if the id_data has two columns and gps_resurrection_id(s) are the track_id(s)
@@ -178,7 +178,7 @@ rFunction = function(
   if(filter_specific){
     # first check if track id(s) or tag_local_identifier(s) exist in the data for filter specific alert ids. if not stop operation.
     if(isFALSE(all(filter_specific_id %in% id_check))){
-      logger.warn(paste("Identifer(s) for individual-specific filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)"))
+      logger.warn("Identifer(s) for individual-specific filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
     } 
     # set all alert variables for these ids to 0
     # if the id_data has two columns and filter_specific_id(s) are the track_id(s)
@@ -207,12 +207,12 @@ rFunction = function(
   # 3) Begin custom filters for e.g., collar end type events # inputs are filter_custom, filter_custom_alias, filter_custom_value
   if(filter_custom){
     if(filter_custom & is.null(filter_custom_alias) | filter_custom & is.null(filter_custom_value)){
-      logger.warn(paste("Must provide filter_custom alias and filter_custom value when filter_custom event is requested"))
+      logger.warn("Must provide filter_custom alias and filter_custom value when filter_custom event is requested")
     }
     # check if filter_custom alias is in the dataset
     if(isFALSE(all(filter_custom_alias %in% colnames(data)))){
       alias_not_found <- filter_custom_alias[which(filter_custom_alias %in% colnames(data) == FALSE)]
-      logger.warn(paste("filter_custom alias(es) not found in dataset:",alias_not_found))
+      logger.warn("filter_custom alias(es) not found in dataset:",alias_not_found)
     }
     # check if filter_custom variables are a factor, if not, convert them
     if(isFALSE(all(data |> as.data.frame() |> dplyr::select(all_of(filter_custom_alias)) |> sapply(is.factor)))){
