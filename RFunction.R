@@ -256,6 +256,15 @@ rFunction = function(
     }
   }
   # end custom filters
+  # create a count of alerts for each individual for email alert app
+  temp_data <- data
+  temp_data$alertSum <- data |> as.data.frame() |> dplyr::select(mortality,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection) |>
+    apply(1,sum)
+  # now create nAlerts variable by getting maximum number of alerts for each individual
+  temp_data <- temp_data |> group_by(.data[[mt_track_id_column(temp_data)]]) |> mutate(nAlerts = max(alertSum)) |> ungroup()
+  # now update nAlerts field in data
+  data$nAlerts <- temp_data$nAlerts
+  # return move2 data
   return(data)
 }    
 # End of alert filter function
