@@ -9,7 +9,7 @@ Provides 3 classes of filtering for 7 different types of collar health alerts (m
 
 ## Documentation
 This App provides functionality to filter collar health alerts that were appended to the user's move2 dataset from using the Collar Health Alert App in the previous step in a workflow. It allows the user to (1) filter the data for a specific alert type (e.g., mortality) and identifier (either the track id(s) or serial number(s) ("tag_local_identifier") but not both at the same time), (2) filter all alerts in the data for a specific identifier (either the track id(s) or serial number(s)), or (3) filter all alerts in the data based on a field (e.g., "collar_end_type") in the data and specific value in that field (e.g., "off-air"). The filters will not remove individual(s) from the dataset. Rather, the filtering will change the respective alert fields from a value of 1 to 0 (denoting no alert present). The custom filter that uses a variable in the data will identifiy any individual(s) in the data that have the value of that variable and set all of their alert variables to 0. 
-Finally, this App was designed as a precusor step in a workflow for the Collar Health Shiny App that allows the user to visualize the data in Leaflet basemaps, as well as graphical and tabular form.
+Finally, this App was designed as a precusor step in a workflow for the Collar Health Shiny App that allows the user to visualize the data in Leaflet basemaps, as well as graphical and tabular form. 
 
 ### Application scope
 #### Generality of App usability
@@ -25,6 +25,7 @@ The App should work for any kind of (location) data. However, the App is only me
 `move2::move2_loc`
 
 ### Artefacts
+None.
 
 ### Settings 
 **Set mortality-specific filter (`mortality`):** This logical input acts as a switch to turn on mortality alert filtering based on idenfier(s) provided in the `mortality_id` input. 
