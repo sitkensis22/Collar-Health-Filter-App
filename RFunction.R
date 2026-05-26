@@ -256,6 +256,8 @@ rFunction = function(
     }
   }
   # end custom filters
+  # remove nAlerts field because it will need to be overwritten
+  data <- data |> select(-nAlerts)
   # update number of alerts per individual and create tibble after filtering operations
   alertSums <- data |> as.data.frame() |>
                group_by(.data[[mt_track_id_column(data)]]) |>
@@ -268,8 +270,12 @@ rFunction = function(
                       gps_resurrection = ifelse(gps_resurrection  > 1, 1, 0)) |> ungroup() |> 
                mutate(nAlerts = rowSums(across(c(mortality,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection)))) |>
                select(-c(mortality,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection))
-    # merge nAlerts into move2 data
-    data <- left_join(data, alertSums, by = mt_track_id_column(data))
+  # merge nAlerts into move2 data
+  data <- left_join(data, alertSums, by = mt_track_id_column(data))
+  # get index of geometry field
+  geometry_index <- which(colnames(data) == "geometry")
+  # now organize data set
+  data <- data[,c((1:ncol(data))[-geometry_index],geometry_index)]
   # return move2 data
   return(data)
 }    
