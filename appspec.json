@@ -182,7 +182,8 @@
       "roles": [
         "author",
         "creator"
-      ]
+      ],
+      "affiliation": "Government of Yukon"
     },
     {
       "firstName": "Mike",
@@ -192,7 +193,8 @@
       "roles": [
         "author",
         "creator"
-      ]
+      ],
+      "affiliation": "Government of Yukon"
     }
   ],
   "funding": [
