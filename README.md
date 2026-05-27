@@ -70,6 +70,7 @@ None.
 The App filters the binary numerical (1/0) fields that were appended to the move2 data in the previous workflow step by the Collar Health Alert App, where the condition is 1 for locations that meet the alert criteria and 0 otherwise. When a filtering condition is met, one or all of the alert fields (mortality, cluster, nsd, voltage, gps_accuracy, gps_transmission, and gps_resurrection) are set to 0 for the identifier(s) present in the filter input settings (e.g., `filter_specific_id`) depending on which filter types are activated. Note that these alert fields are used downstream in other Apps that integrate into a workflow such as the Collar Health Shiny App. The field `nAlerts` in the data, which tracks the number of unique alert events for each individual, is also updated after the filtering has occurred.
 
 ### Most common errors
+Please document and send errors to daniel.eacker@tauruswildlifeconsulting.com.
 
 ### Null or error handling
 **Setting `mortality_id`:** If the identifier(s) are not present in the input dataset or not provided when the mortality filter switch is activated, an error will be returned. If the spelling does not match exactly, an error will be returned. Review available variables in the input dataset to confirm their existence and spelling. 
