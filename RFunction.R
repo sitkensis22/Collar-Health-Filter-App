@@ -21,6 +21,8 @@ rFunction = function(
   gps_transmission_id = NULL, # character vector of ids to apply gps_transmission filter to. You can input the track id or local_tag_identifier (serial #) as the input
   gps_resurrection = FALSE, # logical indicator to filter gps_resurrection alerts for the ids provided in 'gps_resurrection_id' input
   gps_resurrection_id = NULL, # character vector of ids to apply gps_resurrection filter to. You can input the track id or local_tag_identifier (serial #) as the input
+  tag_release = FALSE, # logical indicator to filter tag_release alerts for the ids provided in 'tag_release_id' input
+  tag_release_id = NULL, # character vector of ids to apply tag_release filter to. You can input the track id or local_tag_identifier (serial #) as the input
   # individual specific fliter (filter any alerts from the given ids)
   filter_specific = FALSE, # logical indicator to activate individual filtering that removes any alerts from the individual
   filter_specific_id = NULL, # # character vector of id(s) to apply individual filtering to. You can input the track id or local_tag_identifier (serial #) as the input
