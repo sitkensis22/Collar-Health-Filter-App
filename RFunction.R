@@ -175,6 +175,24 @@ rFunction = function(
     }
     # end gps_resurrection alert filtering 
   }  
+  # tag_release alerts
+  if(tag_release){
+    # first check if track id(s) or tag_local_identifier(s) exist in the data for tag_release alert ids. if not stop operation.
+    if(isFALSE(all(tag_release_id %in% id_check))){
+      logger.warn("Identifier(s) for tag_release alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
+    }
+    # now filter tag_release alerts for given tag_release_id(s)
+    # if the id_data has two columns and tag_release_id(s) are the track_id(s)
+    if(all(ncol(id_data) %in% c(1,2) & tag_release_id %in% levels(id_data$track_id))){
+      data[mt_track_id(data) %in% tag_release_id,]$tag_release = 0
+    }else
+    # if the id_data has two columns and tag_release_id(s) are the tag_local_identifier(s)  
+    if(all(ncol(id_data) == 2 & tag_release_id %in% levels(id_data$tag_local_identifier))){
+      temp_id <- id_data[which(id_data$tag_local_identifier %in% tag_release_id),]$track_id
+      data[mt_track_id(data) %in% temp_id,]$tag_release = 0
+    }
+    # end tag_release alert filtering 
+  } 
   # end of alert-specific filter section
   # 2) individual specific filtering (can be track id or tag_local_identifier) 
   if(filter_specific){
@@ -192,6 +210,7 @@ rFunction = function(
       data[mt_track_id(data) %in% filter_specific_id,]$gps_accuracy = 0
       data[mt_track_id(data) %in% filter_specific_id,]$gps_transmission = 0
       data[mt_track_id(data) %in% filter_specific_id,]$gps_resurrection = 0
+      data[mt_track_id(data) %in% filter_specific_id,]$tag_release = 0
     }else
     # if the id_data has two columns and filter_specific_id(s) are the tag_local_identifier(s)  
     if(all(ncol(id_data) == 2 & filter_specific_id %in% levels(id_data$tag_local_identifier))){
@@ -203,6 +222,7 @@ rFunction = function(
       data[mt_track_id(data) %in% temp_id,]$gps_accuracy = 0
       data[mt_track_id(data) %in% temp_id,]$gps_transmission = 0
       data[mt_track_id(data) %in% temp_id,]$gps_resurrection = 0
+      data[mt_track_id(data) %in% temp_id,]$tag_release = 0
     }
   }
   # end of individual-specific filter section
@@ -255,6 +275,7 @@ rFunction = function(
       data[mt_track_id(data) %in% filter_custom_id,]$gps_accuracy = 0
       data[mt_track_id(data) %in% filter_custom_id,]$gps_transmission = 0
       data[mt_track_id(data) %in% filter_custom_id,]$gps_resurrection = 0
+      data[mt_track_id(data) %in% filter_custom_id,]$tag_release = 0
     }
   }
   # end custom filters
@@ -265,13 +286,16 @@ rFunction = function(
                group_by(.data[[mt_track_id_column(data)]]) |>
                summarize(mortality = sum(mortality),cluster = sum(cluster),
                nsd = sum(nsd), voltage = sum(voltage), gps_accuracy = sum(gps_accuracy), 
-               gps_transmission = sum(gps_transmission), gps_resurrection = sum(gps_resurrection)) |>
+               gps_transmission = sum(gps_transmission), gps_resurrection = sum(gps_resurrection),
+               tag_release = sum(tag_release)) |>
                mutate(mortality = ifelse(mortality > 1, 1, 0), cluster = ifelse(cluster> 1, 1, 0),
-                      nsd = ifelse(nsd > 1, 1, 0), voltage = ifelse(voltage > 1, 1, 0),
-                      gps_accuracy = ifelse(gps_accuracy > 1, 1, 0), gps_transmission = ifelse(gps_transmission > 1, 1, 0),
-                      gps_resurrection = ifelse(gps_resurrection  > 1, 1, 0)) |> ungroup() |> 
-               mutate(nAlerts = rowSums(across(c(mortality,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection)))) |>
-               select(-c(mortality,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection))
+               nsd = ifelse(nsd > 1, 1, 0), voltage = ifelse(voltage > 1, 1, 0),
+               gps_accuracy = ifelse(gps_accuracy > 1, 1, 0), gps_transmission = ifelse(gps_transmission > 1, 1, 0),
+               gps_resurrection = ifelse(gps_resurrection  > 1, 1, 0), tag_release = ifelse(tag_release  > 1, 1, 0)) |> ungroup() |> 
+               mutate(nAlerts = rowSums(across(c(mortality,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection,tag_release)))) |>
+               select(-c(mortality,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection,tag_release))
+  # merge nAlerts into move2 data
+  data <- left_join(data, alertSums, by = mt_track_id_column(data))
   # merge nAlerts into move2 data
   data <- left_join(data, alertSums, by = mt_track_id_column(data))
   # get index of geometry field
