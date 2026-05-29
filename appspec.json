@@ -100,6 +100,20 @@
       "type": "STRING"
     },
     {
+      "id": "tag_release",
+      "name": "Set tag scheduled deployment filter?",
+      "description": "Please check this box if you want to filter scheduled tag deployment date alerts for specific id(s).",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "tag_release_id",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for tag scheduled deployment alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter tag scheduled deployment alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if tag scheduled deployment filter is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
       "id": "filter_specific",
       "name": "Set filter for specific id(s)?",
       "description": "Please check this box if you want to filter out all alerts for a specific track id(s) or serial number(s) (i.e., local_tag_identifier).",
