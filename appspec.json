@@ -16,6 +16,20 @@
       "type": "STRING"
     },
     {
+      "id": "resurrection",
+      "name": "Set mortality resurrection-specific filter?",
+      "description": "Please check this box if you want to filter mortality resurrection alerts for specific id(s).",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "resurrection_id",
+      "name": "Track id(s) or serial number(s) (i.e., local_tag_identifier) for mortality resurrection alert filtering",
+      "description": "Enter track id(s) or serial number(s) (i.e., local_tag_identifier) to filter mortality resurrection alerts by. Note that multiple id(s) may be provided but they must be either the track id(s) or serial number(s) and not a mix of both. Multiple values must be comma-separated and input is only used if mortality filter is activated.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
       "id": "cluster",
       "name": "Set cluster-specific filter?",
       "description": "Please check this box if you want to filter cluster alerts for specific id(s).",
