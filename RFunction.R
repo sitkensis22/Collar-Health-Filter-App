@@ -3,12 +3,14 @@ library("tidyverse")
 
 ## The parameter "data" is reserved for the data object passed on from the previous app
 
-# R function to filter 7 (currently) alert triggers from Collar Health Alert App
+# R function to filter 9 alert triggers from Collar Health Alert App
 rFunction = function(
   data, # read in data (move2 object)
   # alert specific filters
   mortality = FALSE, # logical indicator to filter mortality alerts for the ids provided in 'mortality_id' input
   mortality_id = NULL, # character vector of ids to apply mortality filter to. You can input the track id or local_tag_identifier (serial #) as the input
+  resurrection = FALSE, # logical indicator to filter mortality resurrection alerts for the ids provided in 'resurrection_id' input
+  resurrection_id = NULL, # character vector of ids to apply mortality resurrection filter to. You can input the track id or local_tag_identifier (serial #) as the input
   cluster = FALSE, # logical indicator to filter cluster alerts for the ids provided in 'cluster_id' input
   cluster_id = NULL, # character vector of ids to apply cluster filter to. You can input the track id or local_tag_identifier (serial #) as the input
   nsd = FALSE, # logical indicator to filter nsd alerts for the ids provided in 'nsd_id' input
@@ -67,6 +69,24 @@ rFunction = function(
     }
   }  
   # end mortality alert filtering    
+  # mortality resurrection alerts
+  if(resurrection){
+    # first check if track id(s) or tag_local_identifier(s) exist in the data for mortality alert ids. if not stop operation.
+    if(isFALSE(all(resurrection_id %in% id_check))){
+      logger.warn("Identifier(s) for mortality resurrection alert filter does not exist in dataset. Check spelling of id(s) or check in the dataset for individual(s)")
+    }
+    # now filter mortality resurrection alerts for given resurrection_id(s)
+    # if the id_data has two columns and mortality_id(s) are the track_id(s)
+    if(all(ncol(id_data) %in% c(1,2) & resurrection_id %in% levels(id_data$track_id))){
+      data[mt_track_id(data) %in% resurrection_id,]$resurrection = 0
+    }else
+      # if the id_data has two columns and resurrection_id(s) are the tag_local_identifier(s)  
+      if(all(ncol(id_data) == 2 & resurrection_id %in% levels(id_data$tag_local_identifier))){
+        temp_id <- id_data[which(id_data$tag_local_identifier %in% resurrection_id),]$track_id
+        data[mt_track_id(data) %in% temp_id,]$resurrection = 0
+      }
+  }  
+  # end mortality resurrection alert filtering    
   # cluster alerts
   if(cluster){
     # first check if track id(s) or tag_local_identifier(s) exist in the data for cluster alert ids. if not stop operation.
@@ -204,6 +224,7 @@ rFunction = function(
     # if the id_data has two columns and filter_specific_id(s) are the track_id(s)
     if(all(ncol(id_data) %in% c(1,2) & filter_specific_id %in% levels(id_data$track_id))){
       data[mt_track_id(data) %in% filter_specific_id,]$mortality = 0
+      data[mt_track_id(data) %in% filter_specific_id,]$resurrection = 0
       data[mt_track_id(data) %in% filter_specific_id,]$cluster = 0
       data[mt_track_id(data) %in% filter_specific_id,]$nsd = 0
       data[mt_track_id(data) %in% filter_specific_id,]$voltage = 0
@@ -216,6 +237,7 @@ rFunction = function(
     if(all(ncol(id_data) == 2 & filter_specific_id %in% levels(id_data$tag_local_identifier))){
       temp_id <- id_data[which(id_data$tag_local_identifier %in% filter_specific_id),]$track_id
       data[mt_track_id(data) %in% temp_id,]$mortality = 0
+      data[mt_track_id(data) %in% temp_id,]$resurrection = 0
       data[mt_track_id(data) %in% temp_id,]$cluster = 0
       data[mt_track_id(data) %in% temp_id,]$nsd = 0
       data[mt_track_id(data) %in% temp_id,]$voltage = 0
@@ -269,6 +291,7 @@ rFunction = function(
         as.data.frame() |> dplyr::select(mt_track_id_column(data)) |> unique()
       # set all alerts to 0 for filter_custom_id(s)
       data[mt_track_id(data) %in% filter_custom_id,]$mortality = 0
+      data[mt_track_id(data) %in% filter_custom_id,]$resurrection = 0
       data[mt_track_id(data) %in% filter_custom_id,]$cluster = 0
       data[mt_track_id(data) %in% filter_custom_id,]$nsd = 0
       data[mt_track_id(data) %in% filter_custom_id,]$voltage = 0
@@ -284,16 +307,16 @@ rFunction = function(
   # update number of alerts per individual and create tibble after filtering operations
   alertSums <- data |> as.data.frame() |>
                group_by(.data[[mt_track_id_column(data)]]) |>
-               summarize(mortality = sum(mortality),cluster = sum(cluster),
+               summarize(mortality = sum(mortality), resurrection = sum(resurrection),cluster = sum(cluster),
                nsd = sum(nsd), voltage = sum(voltage), gps_accuracy = sum(gps_accuracy), 
                gps_transmission = sum(gps_transmission), gps_resurrection = sum(gps_resurrection),
                tag_release = sum(tag_release)) |>
-               mutate(mortality = ifelse(mortality >= 1, 1, 0), cluster = ifelse(cluster >= 1, 1, 0),
-               nsd = ifelse(nsd >= 1, 1, 0), voltage = ifelse(voltage >= 1, 1, 0),
+               mutate(mortality = ifelse(mortality >= 1, 1, 0), resurrection = ifelse(resurrection >= 1, 1, 0), 
+               cluster = ifelse(cluster >= 1, 1, 0), nsd = ifelse(nsd >= 1, 1, 0), voltage = ifelse(voltage >= 1, 1, 0),
                gps_accuracy = ifelse(gps_accuracy >= 1, 1, 0), gps_transmission = ifelse(gps_transmission >= 1, 1, 0),
                gps_resurrection = ifelse(gps_resurrection >= 1, 1, 0), tag_release = ifelse(tag_release >= 1, 1, 0)) |> ungroup() |> 
-               mutate(nAlerts = rowSums(across(c(mortality,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection,tag_release)))) |>
-               select(-c(mortality,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection,tag_release))
+               mutate(nAlerts = rowSums(across(c(mortality,resurrection,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection,tag_release)))) |>
+               select(-c(mortality,resurrection,cluster,nsd,voltage,gps_accuracy,gps_transmission,gps_resurrection,tag_release))
   # merge nAlerts into move2 data
   data <- left_join(data, alertSums, by = mt_track_id_column(data))
   # get index of geometry field
@@ -304,3 +327,4 @@ rFunction = function(
   return(data)
 }    
 # End of alert filter function
+
